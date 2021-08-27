@@ -18,7 +18,8 @@ public class Application {
 			ResultSet rs = statement.executeQuery(SELECT_SHELTER_QUERY);
 			
 			while (rs.next()) {
-				System.out.println("shelter id = " + rs.getInt(1));
+				System.out.println("location id = " + rs.getInt(1) + " clinic onsite = " + rs.getString(2)
+				 + " number of cats = " + rs.getInt(3) + " number of dogs = " + rs.getInt(4));
 		}
 			
 		} catch (SQLException e) {
