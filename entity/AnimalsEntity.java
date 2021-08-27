@@ -1,6 +1,7 @@
 package entity;
 
 import java.sql.Date;
+import java.util.List;
 
 public class AnimalsEntity {
 	private int pet_id;
@@ -118,6 +119,10 @@ public class AnimalsEntity {
 		this.age = age;
 		this.color = color;
 		this.gender = gender;
+	}
+
+	public AnimalsEntity(int id, String name, List<ShelterEntity> animalsByLocationID) {
+		// TODO Auto-generated constructor stub
 	}
 	
 	
