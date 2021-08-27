@@ -14,6 +14,10 @@ public class ShelterEntity {
 		this.number_of_dogs = number_of_dogs;
 	}
 
+	public ShelterEntity(int int1, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getLocation_id() {
 		return location_id;
 	}
