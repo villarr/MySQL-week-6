@@ -1,7 +1,7 @@
 package entity;
 
 import java.sql.Date;
-import java.util.List;
+
 
 public class AnimalsEntity {
 	private int pet_id;
@@ -14,6 +14,7 @@ public class AnimalsEntity {
 	private String immunized;
 	private String desexed;
 	private java.sql.Date intake_date;
+	
 	
 	public AnimalsEntity(int pet_id, int location_id, String species, String pet_name, int age, String color,
 			String gender, String immunized, String desexed, Date intake_date) {
@@ -28,7 +29,9 @@ public class AnimalsEntity {
 		this.desexed = desexed;
 		this.intake_date = intake_date;
 	}
-
+	public int getAnimals() {
+		return pet_id;
+	}
 	public int getPet_id() {
 		return pet_id;
 	}
@@ -119,10 +122,7 @@ public class AnimalsEntity {
 		this.age = age;
 		this.color = color;
 		this.gender = gender;
-	}
-
-	public AnimalsEntity(int id, String name, List<ShelterEntity> animalsByLocationID) {
-		// TODO Auto-generated constructor stub
+	
 	}
 	
 	
