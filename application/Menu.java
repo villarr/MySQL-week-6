@@ -6,11 +6,14 @@ import java.util.Scanner;
 import dao.AnimalsDao;
 import dao.VolunteersDao;
 import dao.ShelterDao;
+import dao.FosteringDao;
 
 public class Menu {
 	private AnimalsDao animalDao = new AnimalsDao();
 	private VolunteersDao volunteerDao = new VolunteersDao();
+	private FosteringDao fosterDao = new FosteringDao();
 	private ShelterDao shelterDao = new ShelterDao();
+	
 	private Scanner scanner = new Scanner(System.in);
 	
 	private List<String> options = Arrays.asList(
@@ -40,7 +43,8 @@ public class Menu {
 			System.out.println("\n");
 			
 		} else if (selection.equals("3")) {
-			//displayFostering();
+			fosterDao.getFostering();
+			System.out.println("\n");
 			
 		} else if (selection.equals("4")) {
 			shelterDao.getShelter();
