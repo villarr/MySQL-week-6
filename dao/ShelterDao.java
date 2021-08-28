@@ -10,25 +10,18 @@ import java.util.List;
 public class ShelterDao {
 	
 	private Connection connection;
-	
-	public ShelterDao(Connection connection) {
-		this.connection = connection;
-	}
+	private final String GET_SHELTER_QUERY = "SELECT * FROM shelter";
 
-	private String sql = "SELECT * FROM animals";
-	
 	public ShelterDao() {
-		
-	}
-	public ShelterDao(Integer id) throws SQLException {
-		PreparedStatement ps = connection.prepareStatement(sql);
-		ResultSet rs = ps.executeQuery(sql);
-		while (rs.next()) {
-		System.out.println("field 1 = " + (rs.getInt(1)) + (rs.getString(2)));	
-		}
+		connection = DBConnection.getConnection();	
 	}
 
-public static void main(String[] args) throws SQLException {
-	
-}
+	public void getShelter() throws SQLException {
+		ResultSet rs = connection.prepareStatement(GET_SHELTER_QUERY).executeQuery();
+		while (rs.next()) {
+		System.out.println("Location id = " + rs.getInt(1) + " Clinic Onsite (Y/N) = " + rs.getString(2)
+		 + " Number of Cats = " + rs.getInt(3) + " Number of Dogs = " + rs.getInt(4) + "\n");
+	}
+
+	}
 }

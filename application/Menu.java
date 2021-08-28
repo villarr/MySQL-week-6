@@ -3,13 +3,14 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-
 import dao.AnimalsDao;
 import dao.VolunteersDao;
+import dao.ShelterDao;
 
 public class Menu {
 	private AnimalsDao animalDao = new AnimalsDao();
 	private VolunteersDao volunteerDao = new VolunteersDao();
+	private ShelterDao shelterDao = new ShelterDao();
 	private Scanner scanner = new Scanner(System.in);
 	
 	private List<String> options = Arrays.asList(
@@ -42,7 +43,8 @@ public class Menu {
 			//displayFostering();
 			
 		} else if (selection.equals("4")) {
-			//displayShelter();
+			shelterDao.getShelter();
+			System.out.println("\n");
 			
 		} else if (selection.equals("5")) {
 			//createAnimals();
