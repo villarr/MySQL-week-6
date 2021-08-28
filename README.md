@@ -10,5 +10,5 @@ You need to have at least 3 entities.
 Users should be able to interact via the console (i.e. Scanner(System.in)))
 Everyone must individually submit their own assignment documents and the full code for the entire project. 
 Inside the code, use comments to make it clear which code you specifically wrote. 
-Although git provides collaboration functionality, you are not required to use it to 
-collaborate back and forth with your teammates. You can use any method you decide on as a team. 
+Although git provides collaboration functionality, you are not required to use it to collaborate back and forth with your teammates. 
+You can use any method you decide on as a team. 
