@@ -6,7 +6,8 @@ public class FosteringEntity {
 	private int fostering_id;
 	private int pet_id;
 	private int volunteer_id;
-	private java.sql.Date foster_date;
+	private Date foster_date;
+
 
 public FosteringEntity(int fostering_id, int pet_id, int volunteer_id, Date foster_date) {
 	this.fostering_id = fostering_id;
@@ -38,12 +39,11 @@ public int getVolunteer_id() {
 public void setVolunteer_id(int volunteer_id) {
 	this.volunteer_id = volunteer_id;
 }
-
-public java.sql.Date getFoster_date() {
+public Date getFoster_date() {
 	return foster_date;
 }
 
-public void setFoster_date(java.sql.Date foster_date) {
+public void setFoster_date(Date foster_date) {
 	this.foster_date = foster_date;
 }
 
