@@ -68,7 +68,8 @@ public class Menu {
 			System.out.println("\n");
 			
 		} else if (selection.equals("9")) {
-			//updateAnimals();
+			animalDao.updateAnimals();
+			System.out.println("\n");
 			
 		} else if (selection.equals("10")) {
 			//updateVolunteers();

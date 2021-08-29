@@ -12,6 +12,7 @@ private final String GET_ANIMALS_QUERY = "SELECT * FROM animals";
 private final String CREATE_ANIMALS_QUERY = "INSERT INTO animals (pet_id, location_id, species, pet_name, age,\n"
 + "color, gender, immunized, desexed, intake_date) VALUES(?,?,?,?,?,?,?,?,?,?)";
 private final String DELETE_ANIMALS_QUERY = "DELETE from animals WHERE pet_id = ?"; 
+private final String UPDATE_ANIMALS_QUERY = "UPDATE animals SET immunized = ? WHERE pet_id = ?";
 private Scanner sc = new Scanner(System.in);
 
 public AnimalsDao() {
@@ -74,7 +75,7 @@ int rows = ps.executeUpdate();
 
 if (rows > 0) {
 	System.out.println("New information has been added to the animals table. Thank you." + "\n");
-} else System.out.println("No records were updated.");
+} else System.out.println("No records were added.");
 }
 
 public void deleteAnimals() throws SQLException {
@@ -102,12 +103,43 @@ public void deleteAnimals() throws SQLException {
 	} else System.out.println("No records were updated.");		
 	
 }
+public void updateAnimals() throws SQLException {
+	ResultSet rs = connection.prepareStatement(GET_ANIMALS_QUERY).executeQuery();
+	while (rs.next()) {
+	System.out.println("pet id = " + rs.getInt(1) + " pet name = " + rs.getString(4));
+	}
+	System.out.println("\n");
+	int n = 0; 
+
+	PreparedStatement ps = connection.prepareStatement(UPDATE_ANIMALS_QUERY);
+
+	System.out.println("Enter no. of animals to update"); 
+	n = sc.nextInt();
+
+	for (int i = 1; i <= n; i++) {
+		System.out.println("Enter an updated immunization status Y/N (int)");
+		String imm = sc.next();
+		ps.setString(1,imm);
+		System.out.println("Enter a pet id to update 1 - 1000 (int)");
+		Integer pet_id = sc.nextInt();
+		ps.setInt(2,pet_id);
+		
+	}
+	int rows = ps.executeUpdate();
+
+	if (rows > 0) {
+		System.out.println(n + " records have been updated in the animals table." + "\n");
+	} else System.out.println("No records were updated.");		
+	
+}
 public void getAnimals() throws SQLException {
 	ResultSet rs = connection.prepareStatement(GET_ANIMALS_QUERY).executeQuery();
 	while (rs.next()) {
 	System.out.println("pet id = " + rs.getInt(1) + " location = " + rs.getString(2)
 	 + " species = " + rs.getString(3) + " pet name = " + rs.getString(4)
-	 + " age = " + rs.getInt(5) + " color = " + rs.getString(6) + "\n");
+	 + " age = " + rs.getInt(5) + " color = " + rs.getString(6) + " gender = " + rs.getString(7) 
+	 + " immunized = " + rs.getString(8) + " desexed = " + rs.getString(9) 
+	 + " intake = " + rs.getString(10) + "\n");
 }
 
 }
