@@ -23,7 +23,9 @@ public class Menu {
 			"Create Animals",
 			"Delete Animals",
 			"Create Volunteers",
-			"Delete Volunteers"
+			"Delete Volunteers",
+			"Update Animals",
+			"Update Volunteers"
 			);
 	
 	
@@ -58,10 +60,18 @@ public class Menu {
 			System.out.println("\n");
 			
 		} else if (selection.equals("7")) {
-			//createVolunteers();
+			volunteerDao.createVolunteers();
+			System.out.println("\n");
 			
-		} else if (selection.equals("7")) {
-			//deleteVolunteers();
+		} else if (selection.equals("8")) {
+			volunteerDao.deleteVolunteers();
+			System.out.println("\n");
+			
+		} else if (selection.equals("9")) {
+			//updateAnimals();
+			
+		} else if (selection.equals("10")) {
+			//updateVolunteers();
 		}
 			
 		} while (!selection.equals("-1"));
