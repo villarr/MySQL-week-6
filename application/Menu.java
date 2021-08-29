@@ -51,9 +51,11 @@ public class Menu {
 			
 		} else if (selection.equals("5")) {
 			animalDao.createAnimals();
+			System.out.println("\n");
 			
 		} else if (selection.equals("6")) {
-			//deleteAnimals();
+			animalDao.deleteAnimals();
+			System.out.println("\n");
 			
 		} else if (selection.equals("7")) {
 			//createVolunteers();

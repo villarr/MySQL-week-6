@@ -9,9 +9,9 @@ public class AnimalsDao {
 
 private Connection connection;
 private final String GET_ANIMALS_QUERY = "SELECT * FROM animals";
-private final String CREATE = "INSERT INTO animals (pet_id, location_id, species, pet_name, age,\n"
+private final String CREATE_ANIMALS_QUERY = "INSERT INTO animals (pet_id, location_id, species, pet_name, age,\n"
 + "color, gender, immunized, desexed, intake_date) VALUES(?,?,?,?,?,?,?,?,?,?)";
-
+private final String DELETE_ANIMALS_QUERY = "DELETE from animals WHERE pet_id = ?"; 
 private Scanner sc = new Scanner(System.in);
 
 public AnimalsDao() {
@@ -22,7 +22,7 @@ public void createAnimals () throws SQLException {
 
 int n = 0; 
 
-PreparedStatement ps = connection.prepareStatement(CREATE);
+PreparedStatement ps = connection.prepareStatement(CREATE_ANIMALS_QUERY);
 
 System.out.println("Enter no. of animals to insert"); 
 n = sc.nextInt();
@@ -73,10 +73,35 @@ ps.setDate(10, date);
 int rows = ps.executeUpdate();
 
 if (rows > 0) {
-	System.out.println("New information has been added to the animals table.");
-} else System.out.println("No recors were updated.");
+	System.out.println("New information has been added to the animals table. Thank you." + "\n");
+} else System.out.println("No records were updated.");
 }
 
+public void deleteAnimals() throws SQLException {
+	ResultSet rs = connection.prepareStatement(GET_ANIMALS_QUERY).executeQuery();
+	while (rs.next()) {
+	System.out.println("pet id = " + rs.getInt(1) + " pet name = " + rs.getString(4));
+	}
+	System.out.println("\n");
+	int n = 0; 
+
+	PreparedStatement ps = connection.prepareStatement(DELETE_ANIMALS_QUERY);
+
+	System.out.println("Enter no. of animals to delete"); 
+	n = sc.nextInt();
+
+	for (int i = 1; i <= n; i++) {
+		System.out.println("Enter a pet id to delete 1 - 1000 (int)");
+		Integer pet_id = sc.nextInt();
+		ps.setInt(1,pet_id);
+	}
+	int rows = ps.executeUpdate();
+
+	if (rows > 0) {
+		System.out.println(n + " records have been deleted from the animals table." + "\n");
+	} else System.out.println("No records were updated.");		
+	
+}
 public void getAnimals() throws SQLException {
 	ResultSet rs = connection.prepareStatement(GET_ANIMALS_QUERY).executeQuery();
 	while (rs.next()) {
