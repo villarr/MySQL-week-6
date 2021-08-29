@@ -1,4 +1,5 @@
 package application;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +14,6 @@ public class Menu {
 	private VolunteersDao volunteerDao = new VolunteersDao();
 	private FosteringDao fosterDao = new FosteringDao();
 	private ShelterDao shelterDao = new ShelterDao();
-	
 	private Scanner scanner = new Scanner(System.in);
 	
 	private List<String> options = Arrays.asList(
@@ -24,7 +24,9 @@ public class Menu {
 			"Create Animals",
 			"Delete Animals",
 			"Create Volunteers",
-			"Delete Volunteers"
+			"Delete Volunteers",
+			"Update Animals",
+			"Update Volunteers"
 			);
 	
 	
@@ -51,16 +53,23 @@ public class Menu {
 			System.out.println("\n");
 			
 		} else if (selection.equals("5")) {
-			//createAnimals();
-			
+			animalDao.createAnimals();
+			System.out.println("\n");
+		
 		} else if (selection.equals("6")) {
 			//deleteAnimals();
 			
 		} else if (selection.equals("7")) {
 			//createVolunteers();
 			
-		} else if (selection.equals("7")) {
+		} else if (selection.equals("8")) {
 			//deleteVolunteers();
+			
+		} else if (selection.equals("9")) {
+			//updateAnimals();
+			
+		} else if (selection.equals("10")) {
+			//updateVolunteers();
 		}
 			
 		} while (!selection.equals("-1"));
@@ -68,8 +77,7 @@ public class Menu {
 			scanner.nextLine();
 			start();
 	}
-
-
+	
 private void printMenu () {
 	System.out.println("Welcome to the Animal Shelter Database. Please make a selection...");
 	for (int i = 0; i < options.size(); i ++) {
