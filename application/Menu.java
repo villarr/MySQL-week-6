@@ -1,19 +1,18 @@
 package application;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import dao.AnimalsDao;
+import dao.FosteringDao;
 import dao.VolunteersDao;
 import dao.ShelterDao;
-import dao.FosteringDao;
 
 public class Menu {
 	private AnimalsDao animalDao = new AnimalsDao();
 	private VolunteersDao volunteerDao = new VolunteersDao();
-	private FosteringDao fosterDao = new FosteringDao();
 	private ShelterDao shelterDao = new ShelterDao();
+	private FosteringDao fosterDao = new FosteringDao();
 	private Scanner scanner = new Scanner(System.in);
 	
 	private List<String> options = Arrays.asList(
@@ -24,9 +23,7 @@ public class Menu {
 			"Create Animals",
 			"Delete Animals",
 			"Create Volunteers",
-			"Delete Volunteers",
-			"Update Animals",
-			"Update Volunteers"
+			"Delete Volunteers"
 			);
 	
 	
@@ -43,7 +40,7 @@ public class Menu {
 		} else if (selection.equals("2")) {
 			volunteerDao.getVolunteers();
 			System.out.println("\n");
-			
+		
 		} else if (selection.equals("3")) {
 			fosterDao.getFostering();
 			System.out.println("\n");
@@ -54,22 +51,15 @@ public class Menu {
 			
 		} else if (selection.equals("5")) {
 			animalDao.createAnimals();
-			System.out.println("\n");
-		
+			
 		} else if (selection.equals("6")) {
 			//deleteAnimals();
 			
 		} else if (selection.equals("7")) {
 			//createVolunteers();
 			
-		} else if (selection.equals("8")) {
+		} else if (selection.equals("7")) {
 			//deleteVolunteers();
-			
-		} else if (selection.equals("9")) {
-			//updateAnimals();
-			
-		} else if (selection.equals("10")) {
-			//updateVolunteers();
 		}
 			
 		} while (!selection.equals("-1"));
@@ -77,7 +67,8 @@ public class Menu {
 			scanner.nextLine();
 			start();
 	}
-	
+
+
 private void printMenu () {
 	System.out.println("Welcome to the Animal Shelter Database. Please make a selection...");
 	for (int i = 0; i < options.size(); i ++) {

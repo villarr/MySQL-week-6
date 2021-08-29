@@ -1,91 +1,82 @@
 package dao;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
-import java.sql.PreparedStatement;
-
 public class AnimalsDao {
 
 private Connection connection;
 private final String GET_ANIMALS_QUERY = "SELECT * FROM animals";
-private final String CREATE_ANIMALS_QUERY = "INSERT INTO animals VALUES(?,?,?,?,?,?,?,?,?,?)";
-private Scanner sc = new Scanner(System.in)
-;
+private final String CREATE = "INSERT INTO animals (pet_id, location_id, species, pet_name, age,\n"
++ "color, gender, immunized, desexed, intake_date) VALUES(?,?,?,?,?,?,?,?,?,?)";
+
+private Scanner sc = new Scanner(System.in);
+
 public AnimalsDao() {
 	connection = DBConnection.getConnection();
 	
 }
-
 public void createAnimals () throws SQLException {
+
+int n = 0; 
+
+PreparedStatement ps = connection.prepareStatement(CREATE);
+
+System.out.println("Enter no. of animals to insert"); 
+n = sc.nextInt();
+
+for (int i = 1; i <= n; i++) {
 	
-PreparedStatement ps = connection.prepareStatement(CREATE_ANIMALS_QUERY);
-System.out.print("Enter a new pet id (int)");
-Integer pet_id = Integer.parseInt(sc.nextLine());
+	System.out.println("Enter a new pet id > 1000 (int)");
+	Integer pet_id = sc.nextInt();
+
+	System.out.println("Enter a location id 1-10(int)");
+	Integer locationId = sc.nextInt();
+
+	System.out.println("Enter either cat or dog(String)");
+	String catOrDog = sc.next();
+
+	System.out.println("Enter the name of the pet (String)");
+	String name = sc.next();
+
+	System.out.println("Enter the pet's age (int)");
+	Integer age = sc.nextInt();
+
+	System.out.println("Enter the color of the pet");
+	String color = sc.next();
+
+	System.out.println("Enter the pet's gender - male or female");
+	String gender = sc.next();
+
+	System.out.println("Immunized? Y/N");
+	String y_n = sc.next();
+
+	System.out.println("Desexed? Y/N");
+	String y_n2 = sc.next();
+
+	System.out.println("Intake Date (Year-Month-Day)");
+	Date date = Date.valueOf(sc.next());
+
 ps.setInt(1,pet_id);
-
-System.out.print("Enter a location id (int)");
-ps.setInt(2,Integer.parseInt(sc.nextLine()));
-
-System.out.print("Enter either cat or dog(String)");
-ps.setString(3, sc.nextLine());
-
-System.out.print("Enter the name of the pet (String)");
-ps.setString(4, sc.nextLine());
-
-System.out.print("Enter the pet's age (int)");
-ps.setInt(5, Integer.parseInt(sc.nextLine()));
-
-System.out.print("Enter the color of the pet");
-ps.setString(6, sc.nextLine());
-
-System.out.print("Enter the pet's gender - M or F");
-ps.setString(7, sc.nextLine());
-
-System.out.print("Enter the pet's gender - M or F");
-ps.setString(8, sc.nextLine());
-
-System.out.print("Desexed? Y/N");
-ps.setString(9, sc.nextLine());
-
-System.out.print("Intake Date (Year-Month-Day)");
-ps.setDate(10, Date.valueOf(sc.nextLine()));
-
-//System.out.print("Enter a new pet id (int)");
-//Integer pet_id = Integer.parseInt(sc.nextLine());
-
-System.out.print("Enter a location id (int)");
-Integer locationId = Integer.parseInt(sc.nextLine());
-
-System.out.print("Enter either cat or dog(String)");
-String catOrDog = sc.nextLine();
-
-System.out.print("Enter the name of the pet (String)");
-String pname = sc.nextLine();
-
-System.out.print("Enter the pet's age (int)");
-Integer page = Integer.parseInt(sc.nextLine());
-
-System.out.print("Enter the color of the pet");
-String pcolor = sc.nextLine();
-
-System.out.print("Enter the pet's gender - M or F");
-String gender = sc.nextLine();
-
-System.out.print("Immunized? Y/N");
-String y_n = sc.nextLine();
-
-System.out.print("Desexed? Y/N");
-String y_n2 = sc.nextLine();
-
-System.out.print("Intake Date (Year-Month-Day)");
-String date = sc.nextLine();
-
-int row = ps.executeUpdate();
-System.out.println(row);
-
+ps.setInt(2,locationId);
+ps.setString(3, catOrDog);
+ps.setString(4, name);
+ps.setInt(5, age);
+ps.setString(6, color);
+ps.setString(7, gender);
+ps.setString(8, y_n);
+ps.setString(9, y_n2);
+ps.setDate(10, date);
 }
+int rows = ps.executeUpdate();
+
+if (rows > 0) {
+	System.out.println("New information has been added to the animals table.");
+} else System.out.println("No recors were updated.");
+}
+
 public void getAnimals() throws SQLException {
 	ResultSet rs = connection.prepareStatement(GET_ANIMALS_QUERY).executeQuery();
 	while (rs.next()) {

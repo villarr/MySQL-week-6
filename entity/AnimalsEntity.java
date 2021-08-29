@@ -114,7 +114,7 @@ public class AnimalsEntity {
 
 	public AnimalsEntity(int pet_id, int location_id, String species, String pet_name, int age, String color,
 			String gender) {
-		
+		super();
 		this.pet_id = pet_id;
 		this.location_id = location_id;
 		this.species = species;
