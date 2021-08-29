@@ -12,7 +12,7 @@ public class FosteringDao {
 	public FosteringDao() {
 		connection = DBConnection.getConnection();	
 	}
-
+	// @villarr - method for reading the fostering table data.
 	public void getFostering() throws SQLException {
 		ResultSet rs = connection.prepareStatement(GET_FOSTER_QUERY).executeQuery();
 		while (rs.next()) {

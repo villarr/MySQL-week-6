@@ -1,5 +1,6 @@
 package application;
 import java.sql.SQLException;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -8,6 +9,7 @@ import dao.FosteringDao;
 import dao.VolunteersDao;
 import dao.ShelterDao;
 
+//@villarr - insances of the Dao classes. Important to create instances to avoid null pointer errors when calling methods. 
 public class Menu {
 	private AnimalsDao animalDao = new AnimalsDao();
 	private VolunteersDao volunteerDao = new VolunteersDao();
@@ -28,9 +30,12 @@ public class Menu {
 			"Update Volunteers"
 			);
 	
+	//@villarr - start method for application using if else loop. Thank you Nick S. for the helpful videos.
 	
 	public void start() throws SQLException {
 		String selection = "";
+	
+	//@villarr - CRUD methods by entity depending on the selection made by the user.
 		
 		do {
 			printMenu();
@@ -82,7 +87,8 @@ public class Menu {
 			start();
 	}
 
-
+//@villarr - initial welcome message in the application.
+	
 private void printMenu () {
 	System.out.println("Welcome to the Animal Shelter Database. Please make a selection...");
 	for (int i = 0; i < options.size(); i ++) {

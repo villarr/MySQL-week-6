@@ -15,7 +15,7 @@ public class ShelterDao {
 	public ShelterDao() {
 		connection = DBConnection.getConnection();	
 	}
-
+	// @villarr - method for reading the shelter table data.
 	public void getShelter() throws SQLException {
 		ResultSet rs = connection.prepareStatement(GET_SHELTER_QUERY).executeQuery();
 		while (rs.next()) {

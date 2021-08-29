@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+// @villarr - Volunteers Dao access object class containing methods and SQL statements used in the methods which are called in the application menu. 
+
 public class VolunteersDao {
 	private Connection connection;
 	private final String GET_VOLUNTEERS_QUERY = "SELECT * FROM volunteers";
@@ -20,6 +22,7 @@ public class VolunteersDao {
 	public VolunteersDao() {
 		connection = DBConnection.getConnection();	
 	}
+	// @villarr - method for creating volunteers
 	
 	public void createVolunteers () throws SQLException {
 
@@ -76,7 +79,9 @@ public class VolunteersDao {
 			System.out.println("New information has been added to the volunteers table. Thank you." + "\n");
 		} else System.out.println("No records were updated.");
 		}
-
+		
+	//@villarr - method for deleting volunteers based on a volunteer id which is displayed when the method is called.
+	
 		public void deleteVolunteers() throws SQLException {
 			ResultSet rs = connection.prepareStatement(GET_VOLUNTEERS_QUERY).executeQuery();
 			while (rs.next()) {
@@ -99,10 +104,12 @@ public class VolunteersDao {
 			int rows = ps.executeUpdate();
 
 			if (rows > 0) {
-				System.out.println(n + " records have been deleted from the animals table." + "\n");
+				System.out.println(n + " records have been deleted from the volunteers table." + "\n");
 			} else System.out.println("No records were updated.");		
 			
 		}
+		// @villarr - method for updating volunteers
+		
 		public void updateVolunteers() throws SQLException {
 			ResultSet rs = connection.prepareStatement(GET_VOLUNTEERS_QUERY).executeQuery();
 			while (rs.next()) {
@@ -133,6 +140,8 @@ public class VolunteersDao {
 			} else System.out.println("No records were updated.");		
 			
 		}
+		// @villarr - method for getting volunteers
+		
 		public void getVolunteers() throws SQLException {
 		ResultSet rs = connection.prepareStatement(GET_VOLUNTEERS_QUERY).executeQuery();
 		while (rs.next()) {

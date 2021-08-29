@@ -1,10 +1,14 @@
 package dao;
 import java.sql.Connection;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+
+
+//@villarr - Animals Dao class containing SQL queries for the CRUD operations which are called in the menu application
 public class AnimalsDao {
 
 private Connection connection;
@@ -19,6 +23,7 @@ public AnimalsDao() {
 	connection = DBConnection.getConnection();
 	
 }
+//@villarr - method for creating a new animal(s) in the animals table.
 public void createAnimals () throws SQLException {
 
 int n = 0; 
@@ -45,7 +50,7 @@ for (int i = 1; i <= n; i++) {
 	System.out.println("Enter the pet's age (int)");
 	Integer age = sc.nextInt();
 
-	System.out.println("Enter the color of the pet");
+	System.out.println("Enter the color of the pet (black, white, red, gray, spotted, brown");
 	String color = sc.next();
 
 	System.out.println("Enter the pet's gender - male or female");
@@ -78,6 +83,8 @@ if (rows > 0) {
 } else System.out.println("No records were added.");
 }
 
+//@villarr - method for deleting animals based on a pet id input. 
+
 public void deleteAnimals() throws SQLException {
 	ResultSet rs = connection.prepareStatement(GET_ANIMALS_QUERY).executeQuery();
 	while (rs.next()) {
@@ -103,6 +110,9 @@ public void deleteAnimals() throws SQLException {
 	} else System.out.println("No records were updated.");		
 	
 }
+
+//@villarr - method for updating immunization status of animals based on their pet id. 
+
 public void updateAnimals() throws SQLException {
 	ResultSet rs = connection.prepareStatement(GET_ANIMALS_QUERY).executeQuery();
 	while (rs.next()) {
@@ -132,6 +142,8 @@ public void updateAnimals() throws SQLException {
 	} else System.out.println("No records were updated.");		
 	
 }
+//@villarr - method for reading in all animal data available.
+
 public void getAnimals() throws SQLException {
 	ResultSet rs = connection.prepareStatement(GET_ANIMALS_QUERY).executeQuery();
 	while (rs.next()) {
