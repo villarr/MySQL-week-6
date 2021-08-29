@@ -72,7 +72,8 @@ public class Menu {
 			System.out.println("\n");
 			
 		} else if (selection.equals("10")) {
-			//updateVolunteers();
+			volunteerDao.updateVolunteers();
+			System.out.println("\n");
 		}
 			
 		} while (!selection.equals("-1"));

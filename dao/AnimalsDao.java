@@ -117,7 +117,7 @@ public void updateAnimals() throws SQLException {
 	n = sc.nextInt();
 
 	for (int i = 1; i <= n; i++) {
-		System.out.println("Enter an updated immunization status Y/N (int)");
+		System.out.println("Enter an updated immunization status Y/N");
 		String imm = sc.next();
 		ps.setString(1,imm);
 		System.out.println("Enter a pet id to update 1 - 1000 (int)");

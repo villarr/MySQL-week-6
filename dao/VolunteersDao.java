@@ -12,7 +12,8 @@ public class VolunteersDao {
 	private final String GET_VOLUNTEERS_QUERY = "SELECT * FROM volunteers";
 	private final String CREATE_VOLUNTEERS_QUERY = "INSERT INTO volunteers (volunteer_id, location_id, first_name, last_name, phone_number,\n"
 	+ "email, foster_dogs, foster_cats, current_foster_pets) VALUES(?,?,?,?,?,?,?,?,?)";
-	private final String DELETE_VOLUNTEERS_QUERY = "DELETE from volunteers WHERE volunteer_id = ?"; 
+	private final String DELETE_VOLUNTEERS_QUERY = "DELETE from volunteers WHERE volunteer_id = ?";
+	private final String UPDATE_VOLUNTEERS_QUERY = "UPDATE volunteers SET current_foster_pets = ? WHERE volunteer_id = ?";
 	private Scanner sc = new Scanner(System.in);
 	
 	
@@ -102,12 +103,44 @@ public class VolunteersDao {
 			} else System.out.println("No records were updated.");		
 			
 		}
-	public void getVolunteers() throws SQLException {
+		public void updateVolunteers() throws SQLException {
+			ResultSet rs = connection.prepareStatement(GET_VOLUNTEERS_QUERY).executeQuery();
+			while (rs.next()) {
+			System.out.println("volunteer id = " + rs.getInt(1) + " first name = " + rs.getString(3) + " last name = " 
+			+ rs.getString(4));
+			}
+			System.out.println("\n");
+			int n = 0;
+
+			PreparedStatement ps = connection.prepareStatement(UPDATE_VOLUNTEERS_QUERY);
+
+			System.out.println("Enter no. of volunteers to update"); 
+			n = sc.nextInt();
+
+			for (int i = 1; i <= n; i++) {
+				System.out.println("Enter an updated foster pet count (int)");
+				Integer count = sc.nextInt();
+				ps.setInt(1,count);
+				System.out.println("Enter a volunteer id 1-100 to update foster pet count for. (int)");
+				Integer pet_id = sc.nextInt();
+				ps.setInt(2,pet_id);
+				
+			}
+			int rows = ps.executeUpdate();
+
+			if (rows > 0) {
+				System.out.println(n + " records have been updated in the volunteers table." + "\n");
+			} else System.out.println("No records were updated.");		
+			
+		}
+		public void getVolunteers() throws SQLException {
 		ResultSet rs = connection.prepareStatement(GET_VOLUNTEERS_QUERY).executeQuery();
 		while (rs.next()) {
 		System.out.println("volunteer id = " + rs.getInt(1) + " location = " + rs.getString(2)
 		 + " first name = " + rs.getString(3) + " last name = " + rs.getString(4)
-		 + " phone number = " + rs.getString(5) + " email = " + rs.getString(6) + "\n");
+		 + " phone number = " + rs.getString(5) + " email = " + rs.getString(6) 
+		 + "  can foster dogs = " + rs.getString(7) + " can foster cats = " + rs.getString(8) 
+		 + " current foster pets = " + rs.getInt(9) + "\n");
 	}
 
 	}
